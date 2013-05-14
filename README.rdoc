@@ -11,9 +11,9 @@ To get started, add the following to your PHP script:
 Simple usage looks like:
 
     Shirtsio::setApiKey('a086134c5625ebfd4e080d19749bc0cb736ad1d5');
-    $myCard = array('number' => '4242424242424242', 'exp_month' => 5, 'exp_year' => 2015);
-    $charge = Shirtsio_Charge::create(array('card' => $myCard, 'amount' => 2000, 'currency' => 'usd'));
-    echo $charge;
+    $categories_resp = Products::list_categories();
+    $categories = json_decode($categories_resp,true);
+    print_r($categories);
 
 = Documentation
 
