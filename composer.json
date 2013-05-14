@@ -1,0 +1,23 @@
+{
+  "name": "shirtsio/shirtsio-php",
+  "description": "Shirtsio PHP Library",
+  "keywords": [
+    "shirtsio",
+    "api"
+  ],
+  "homepage": "https://www.shirts.io/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "shirtsio",
+      "homepage": "https://github.com/ooshirts/shirtsio-php"
+    }
+  ],
+  "require": {
+    "php": ">=5.2",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "classmap": ["lib/Shirtsio/"]
+  }
+}
