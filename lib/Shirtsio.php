@@ -27,3 +27,4 @@ require(dirname(__FILE__) . '/Shirtsio/ApiResource.php');
 
 // Shirts.io API Resources
 require(dirname(__FILE__) . '/Shirtsio/Account.php');
+require(dirname(__FILE__) . '/Shirtsio/Balance.php');
