@@ -30,3 +30,4 @@ require(dirname(__FILE__) . '/Shirtsio/Account.php');
 require(dirname(__FILE__) . '/Shirtsio/Balance.php');
 require(dirname(__FILE__) . '/Shirtsio/Quote.php');
 require(dirname(__FILE__) . '/Shirtsio/Payment.php');
+require(dirname(__FILE__) . '/Shirtsio/Order.php');
