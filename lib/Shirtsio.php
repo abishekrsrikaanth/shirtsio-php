@@ -29,3 +29,4 @@ require(dirname(__FILE__) . '/Shirtsio/ApiResource.php');
 require(dirname(__FILE__) . '/Shirtsio/Account.php');
 require(dirname(__FILE__) . '/Shirtsio/Balance.php');
 require(dirname(__FILE__) . '/Shirtsio/Quote.php');
+require(dirname(__FILE__) . '/Shirtsio/Payment.php');
