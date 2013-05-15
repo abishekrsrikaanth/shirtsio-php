@@ -35,13 +35,11 @@ class Shirtsio_ApiResource extends Shirtsio
     public static function do_request($url = null, $params = null, $method = 'get', $files = null, $no_api_key = false)
     {
         $requestor = new Shirtsio_ApiRequestor(Shirtsio::$apiKey);
-        //print Shirtsio::$apiKey;
         Shirtsio_ApiResource::_validateCall($params, Shirtsio::$apiKey);
         $params = Shirtsio_ApiResource::array_params($no_api_key, $params,$files);
         $url = $requestor->apiUrl($url);
-        //echo $url;
         return $requestor->request($url, $params, $method);
-//        return $requestor->request($url, $params, $method, $files);
+//      return $requestor->request($url, $params, $method, $files);
     }
 }
 # This is the encapsulation class for quote requests to Shirt.io
@@ -53,39 +51,40 @@ class Quote extends Shirtsio_ApiResource
     	# https://shirts.io/api/v1/quote
         return self::do_request(self::$url_quote, $params);
     }   
-}       
+}
+# This is the encapsulation class for Balance requests to Shirt.io       
 class Balance extends Shirtsio_ApiResource
 {
         public static $url_balance = "internal/integration/balance/";
         //public static $url_credit_limit = "internal/integration/credit_limit/";
-
         public static function get_balance()
         {
         # https://shirts.io/api/v1/internal/integration/balance/
         return self::do_request(self::$url_balance);
         }
 }
+# This is the encapsulation class for Payment requests to Shirt.io
 class Payment extends Shirtsio_ApiResource
 {
     public static $url_payment = "payment/";
     public static $url_payment_status = "payment/status/";
 
-    public function  payment($params)
+    public function payment($params)
     {
         # https://shirts.io/api/v1/payment/
-        return self::do_request(self::$url_payment, $params, $method='post',$file=null, $no_api_key = True);
+        return self::do_request(self::$url_payment, $params, $method='post');
     }
      public function  update_payment_url($params){
         # https://shirts.io/api/v1/payment/status/
-        return self::do_request(self::$url_payment_status, $params, $method='post', $file=null, $no_api_key = True);
+        return self::do_request(self::$url_payment_status, $params, $method='post');
      }
    
      public function  get_payment_status($params){
         # https://shirts.io/api/v1/payment/status/
-        return self::do_request(slef::$url_payment_status, $params, $method='get', $file=null, $no_api_key = True);
+        return self::do_request(slef::$url_payment_status, $params, $method='get');
      }
 }
-
+# This is the encapsulation class for Order requests to Shirt.io
 class Order extends Shirtsio_ApiResource{
      public static $url_order = "order/";
      public static $url_status = "status/";
@@ -127,7 +126,8 @@ class Products extends Shirtsio_ApiResource{
         # https://shirts.io/api/v1/products/{Product_ID}/
         $url = self::$url_products.$product_id."/";
         $result_inventory = self::do_request($url, $params);
-        if ($result_inventory && in_array('inventory', $result_inventory)){
+        if ($result_inventory&&array_key_exists('inventory', $result_inventory)){
+//        if ($result_inventory && in_array('inventory', $result_inventory)){
            $inventory = $result_inventory['inventory'];
         }
         return $inventory;

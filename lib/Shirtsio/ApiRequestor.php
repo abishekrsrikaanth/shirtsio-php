@@ -104,8 +104,7 @@ class Shirtsio_ApiRequestor
         if (!$params)
             $params = array();
         $params = self::_encodeObjects($params);
-        list($rbody, $rcode) = $this->_curlRequest($meth, $url, $headers, $params);
-        //echo $rbody."<br/>".$rcode;
+        list($rbody, $rcode) = $this->_curlRequest($meth, $url, $headers, $params);   
         $resp = $this->_interpretResponse($rbody, $rcode);
         return $resp;
     }
@@ -127,22 +126,19 @@ class Shirtsio_ApiRequestor
     private function _curlRequest($meth, $absUrl, $headers, $params)
     {
         $curl = curl_init();
-        $meth = strtolower($meth);
-        //echo $meth; 
+        $meth = strtolower($meth); 
         $opts = array();
         if ($meth == 'get') {
             $opts[CURLOPT_HTTPGET] = 1;
             if (count($params) > 0) {
                 $encoded = self::encode($params);
                 $absUrl = "$absUrl?$encoded";
-#https://www.shirts.io/api/v1/internal/integration/auth/?username=damon.kong&password=kcchy4205                
+            #https://www.shirts.io/api/v1/internal/integration/auth/?username=damon.kong&password=kcchy4205                
             }
         } else if ($meth == 'post') {
             $opts[CURLOPT_POST] = 1;
-        //    $opts[CURLOPT_POSTFIELDS] = array_merge($params,$files);
-            $opts[CURLOPT_POSTFIELDS] = $params;
-            //$encoded = self::encode($params);
-            //$absUrl = "$absUrl?$encoded";
+//          $opts[CURLOPT_POSTFIELDS] = array_merge($params,$files);
+            $opts[CURLOPT_POSTFIELDS] = $params;         
             
         } else if ($meth == 'delete') {
             $opts[CURLOPT_CUSTOMREQUEST] = 'DELETE';
@@ -154,7 +150,6 @@ class Shirtsio_ApiRequestor
             throw new Shirtsio_ApiError("Unrecognized method $meth", $params);
         }
         $absUrl = self::utf8($absUrl);
-        //print_r($absUrl);
         $opts[CURLOPT_URL] = $absUrl;
         $opts[CURLOPT_RETURNTRANSFER] = true;
         $opts[CURLOPT_CONNECTTIMEOUT] = 30;

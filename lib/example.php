@@ -2,10 +2,9 @@
 require_once("Shirtsio.php");
 ############# Account #############
 # get api key
+
 $account_resp= Account::auth(array('username' => 'deantest', 'password' => 'Pa$$w0rd'));
-echo "<br/>";
 print_r($account_resp["api_key"]);
-echo "<br/>";
 
 #############End Account #############
 
@@ -14,64 +13,21 @@ Shirtsio::setApiKey($account_resp['api_key']);
 ############# quote #############
 $quote_resp = Quote::get_quote(Array('garment[0][product_id]'=> 3, 'garment[0][color]'=> 'White', 'garment[0][sizes][med]'=> 100,
                           'print[front][color_count]'=> 5));
-echo "<br/>";
 print_r($quote_resp['subtotal']);
-echo "<br/>";
+
 ############# End quote #############
 
 ############# balance ###############
-//$balance_resp = Balance::get_balance();
-//echo "<br/>";
-//print_r($balance_resp['balance']);
+#get balance
+
+$balance_resp = Balance::get_balance();
+print_r($balance_resp['balance']);
+
 ############# End balance #############
-
-
-
-################# Payment #################
-# check payment
-$TEST_CHECK_PAYMENT = array(
-    'name'=>'John Doe',
-    'company'=> 'Acme Corp',
-    'address1'=> '1 Test Drive',
-    'city'=> 'Test Town',
-    'state'=> 'New York',
-    'zip'=> '99999',
-    'amount'=> '500.23',
-    'payment_type'=>'check',
-    'account_number'=> '39494949',
-    'routing_number'=> '5903495',
-    'account_type'=> 'C',
-);
-
-$TEST_CREDIT_PAYMENT = array(
-    'name'=> 'Johnny Appleseed',
-    'company'=> 'Bigcorp',
-    'address1'=>'1 Hope Lane',
-    'city'=>'Big city',
-    'state'=> 'Iowa',
-    'zip'=>'99999',
-    'amount'=> '1000',
-    'payment_type'=> 'credit_card',
-    'card_number'=> '4242424242424242',
-    'expiration'=> '0215',
-    'cvc'=> '123',
-);
-//    $payment=new Payment($params);
-//    $check_payment_resp =  $payment->payment($TEST_CHECK_PAYMENT);
-//    $credit_payment_resp = $payment->payment($TEST_CREDIT_PAYMENT);
-//    print_r($credit_payment_resp);
-//
-//# get payment status
-//    $payment_status_resp = $payment->get_payment_status(array('transaction_id'=>'329402'));
-//    print_r($payment_status_resp);
-//
-//# add payment webhook url
-//    $payment_status_resp2 = $payment->update_payment_url(array('url'=> "http://yourappurl"));
-//    print_r($payment_status_resp2);
-################# End Payment #################
 
 ################# Order #################
 #place order
+
 $art_work_file_front = realpath("./front.png");
 $proof_file_front = realpath("./front.jpg");
 $art_work_file_back = realpath("./back.png");
@@ -100,58 +56,109 @@ $data = array(
         'garment[0][sizes][lrg]'=> 2, 
         'print[front][color_count]'=> 5);
 $files = array(
-         'print[front][artwork]'=> '@'.$art_work_file_front, 
-         'print[front][proof]'=> '@'.$proof_file_front,
-         'print[back][artwork]'=> '@'.$art_work_file_back, 
-         'print[back][proof]'=> '@'.$proof_front_file_back);
-    $order_resp = Order::place_order($data, $files);
-    print_r($order_resp);
-    print_r($order_resp['order_id']);
+        'print[front][artwork]'=> '@'.$art_work_file_front, 
+        'print[front][proof]'=> '@'.$proof_file_front,
+        'print[back][artwork]'=> '@'.$art_work_file_back, 
+        'print[back][proof]'=> '@'.$proof_front_file_back);
+$order_resp = Order::place_order($data, $files);
+print_r($order_resp);
+print_r($order_resp['order_id']);
 
 # get order status
+
 //$order_status_resp = Order::get_order_status('9999999');
 //print_r($order_status_resp);
-################# End Order #################
+
+################# End Order ################
 
 ################# Products #################
 #list categories
-$categories_resp = Products::list_categories();
-$categories_resp1 = json_decode($categories_resp,true);
-echo "<br/>";
-print_r($categories_resp1);
-echo "<br/>";
-echo $categories_resp1[0]['category_id'];
-echo "<br/>";
-# list products
-$products_resp = Products::list_products($categories_resp1[0]['category_id']);
-$products_resp1=json_decode($products_resp,true);
-print_r($products_resp1);
-echo "<br/>";
-print_r($products_resp1[0]['product_id']);
-echo "<br/>";
-$product_resp = Products::get_product($products_resp1[0]['product_id']);
-$product_resp1 =json_decode($products_resp,true);
-print_r($product_resp1);
-echo "<br/>";
-# inventory count
-$inventory_resp = Products::inventory_count($products_resp1[0]['product_id'], 'White', 'CA');
-echo "<br/>";
-print_r($inventory_resp);
-echo "<br/>";
-################# End Products #################
 
-//################# Webhooh ##################
+$categories_resp = Products::list_categories();
+$categories = json_decode($categories_resp,true);
+print_r($categories);
+echo $categories[0]['category_id'];
+
+# list products
+
+$products_resp = Products::list_products($categories[0]['category_id']);
+$products=json_decode($products_resp,true);
+print_r($products);
+
+$product_resp = Products::get_product($products[0]['product_id']);
+$product =json_decode($product_resp,true);
+print_r($product);
+
+# inventory count
+
+$inventory_resp = Products::inventory_count($products[0]['product_id'], 'White', 'CA');
+print_r($inventory_resp);
+
+################# End Products ###############
+
+################# Webhooh ####################
 # register webhook
+
 $register_webhook_resp = Webhook::add_webhook("http://test_webhook");
 print_r($register_webhook_resp);
-echo "<br/>";
+
 # list webhook
+
 $list_webhook_resp = Webhook::list_webhook();
-print_r($list_webhook_resp); 
-echo "<br/>";
+print_r($list_webhook_resp);
+
 # delete webhook
+
 $delete_webhook_resp = Webhook::delete_webhook("http://test_webhook");
 print_r($delete_webhook_resp);
-echo "<br/>";
-//################# End Webhooh ##################
+
+################# End Webhooh ##################
+
+################# Payment #################
+# check payment
+
+$TEST_CHECK_PAYMENT = array(
+    'name'=>'John Doe',
+    'company'=> 'Acme Corp',
+    'address1'=> '1 Test Drive',
+    'city'=> 'Test Town',
+    'state'=> 'New York',
+    'zip'=> '99999',
+    'amount'=> '500.23',
+    'payment_type'=>'check',
+    'account_number'=> '39494949',
+    'routing_number'=> '5903495',
+    'account_type'=> 'C',
+);
+
+$TEST_CREDIT_PAYMENT = array(
+    'name'=> 'Johnny Appleseed',
+    'company'=> 'Bigcorp',
+    'address1'=>'1 Hope Lane',
+    'city'=>'Big city',
+    'state'=> 'Iowa',
+    'zip'=>'99999',
+    'amount'=> '1000',
+    'payment_type'=> 'credit_card',
+    'card_number'=> '4242424242424242',
+    'expiration'=> '0215',
+    'cvc'=> '123',
+);
+$payment=new Payment();
+$check_payment_resp =  $payment->payment($TEST_CHECK_PAYMENT);
+$credit_payment_resp = $payment->payment($TEST_CREDIT_PAYMENT);
+print_r($check_payment_resp);
+print_r($credit_payment_resp);
+
+# get payment status
+
+$payment_status_resp = $payment->get_payment_status(array('transaction_id'=>'329402'));
+print_r($payment_status_resp);
+
+# add payment webhook url
+
+$payment_status_resp2 = $payment->update_payment_url(array('url'=> "http://yourappurl"));
+print_r($payment_status_resp2);
+
+################# End Payment #################
 ?>
