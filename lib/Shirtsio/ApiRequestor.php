@@ -133,11 +133,11 @@ class Shirtsio_ApiRequestor
             if (count($params) > 0) {
                 $encoded = self::encode($params);
                 $absUrl = "$absUrl?$encoded";
-            #https://www.shirts.io/api/v1/internal/integration/auth/?username=damon.kong&password=kcchy4205                
+            //https://www.shirts.io/api/v1/internal/integration/auth/?username=damon.kong&password=kcchy4205                
             }
         } else if ($meth == 'post') {
             $opts[CURLOPT_POST] = 1;
-//          $opts[CURLOPT_POSTFIELDS] = array_merge($params,$files);
+            //$opts[CURLOPT_POSTFIELDS] = array_merge($params,$files);
             $opts[CURLOPT_POSTFIELDS] = $params;         
             
         } else if ($meth == 'delete') {
