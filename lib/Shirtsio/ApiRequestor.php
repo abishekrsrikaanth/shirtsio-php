@@ -159,7 +159,7 @@ class Shirtsio_ApiRequestor
         #ignored SSL
         $opts[CURLOPT_SSL_VERIFYPEER] = false;
         #Proxy setting
-        $opts[CURLOPT_PROXY] ='172.17.15.15:8080';
+        #$opts[CURLOPT_PROXY] ='proxy address:port';
         curl_setopt_array($curl, $opts);
         $rbody = curl_exec($curl);
         $errno = curl_errno($curl);
