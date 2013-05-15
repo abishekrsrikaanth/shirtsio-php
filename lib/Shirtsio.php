@@ -32,3 +32,4 @@ require(dirname(__FILE__) . '/Shirtsio/Quote.php');
 require(dirname(__FILE__) . '/Shirtsio/Payment.php');
 require(dirname(__FILE__) . '/Shirtsio/Order.php');
 require(dirname(__FILE__) . '/Shirtsio/Products.php');
+require(dirname(__FILE__) . '/Shirtsio/Webhook.php');
