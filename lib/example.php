@@ -65,8 +65,8 @@ print_r($order_resp);
 print_r($order_resp['order_id']);
 
 // get order status
-
-//$order_status_resp = Order::get_order_status('9999999');
+//$Orderid=array('order_id'=>'9999999');
+//$order_status_resp = Order::get_order_status($Orderid);
 //print_r($order_status_resp);
 
 /************ End Order /************/
@@ -75,23 +75,20 @@ print_r($order_resp['order_id']);
 //list categories
 
 $categories_resp = Products::list_categories();
-$categories = json_decode($categories_resp,true);
-print_r($categories);
-echo $categories[0]['category_id'];
+print_r($categories_resp);
 
 // list products
 
-$products_resp = Products::list_products($categories[0]['category_id']);
-$products=json_decode($products_resp,true);
-print_r($products);
+$products_resp = Products::list_products($categories_resp[0]['category_id']);
+print_r($products_resp);
 
-$product_resp = Products::get_product($products[0]['product_id']);
-$product =json_decode($product_resp,true);
-print_r($product);
+
+$product_resp = Products::get_product($products_resp[0]['product_id']);
+print_r($product_resp);
 
 // inventory count
 
-$inventory_resp = Products::inventory_count($products[0]['product_id'], 'White', 'CA');
+$inventory_resp = Products::inventory_count($products_resp[0]['product_id'], 'White', 'CA');
 print_r($inventory_resp);
 
 /************ End Products /************/

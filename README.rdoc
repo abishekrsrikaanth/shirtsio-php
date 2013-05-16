@@ -10,10 +10,9 @@ To get started, add the following to your PHP script:
 
 Simple usage looks like:
 
-    Shirtsio::setApiKey('a086134c5625ebfd4e080d19749bc0cb736ad1d5');
+    Shirtsio::setApiKey('3ef58f89c6c8d0ce3f71e4ab3537db4e24d6ac40');
     $categories_resp = Products::list_categories();
-    $categories = json_decode($categories_resp,true);
-    print_r($categories);
+    print_r($categories_resp);
 
 = Documentation
 

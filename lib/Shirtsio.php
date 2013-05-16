@@ -3,11 +3,15 @@
 // Tested on PHP 5.2, 5.3
 
 // This snippet (and some of the curl code) due to the Facebook SDK.
+$timezone = "Asia/Shanghai";
+if(function_exists('date_default_timezone_set')) {
+	date_default_timezone_set($timezone);
+}
 if (!function_exists('curl_init')) {
-    throw new Exception('Shirtsio needs the CURL PHP extension.');
+	throw new Exception('Shirtsio needs the CURL PHP extension.');
 }
 if (!function_exists('json_decode')) {
-    throw new Exception('Shirtsio needs the JSON PHP extension.');
+	throw new Exception('Shirtsio needs the JSON PHP extension.');
 }
 
 // Shirtsio singleton
