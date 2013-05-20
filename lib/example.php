@@ -65,9 +65,10 @@ print_r($order_resp);
 print_r($order_resp['order_id']);
 
 // get order status
-//$Orderid=array('order_id'=>'9999999');
-//$order_status_resp = Order::get_order_status($Orderid);
-//print_r($order_status_resp);
+
+$Orderid=array('order_id'=>'9999999');
+$order_status_resp = Order::get_order_status($Orderid);
+print_r($order_status_resp);
 
 /************ End Order /************/
 
