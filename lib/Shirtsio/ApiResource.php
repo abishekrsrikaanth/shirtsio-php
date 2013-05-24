@@ -19,7 +19,6 @@ class Shirtsio_ApiResource extends Shirtsio
 			return array_merge($api_key_param, $params);
 		}
 			
-		//print_r( $api_key_param);
 		return $api_key_param;
 	}
 

@@ -112,7 +112,7 @@ class Shirtsio_ApiRequestor
 	private function _interpretResponse($rbody, $rcode)
 	{
 		try {
-			$resp = json_decode($rbody, true);
+			$resp  = json_decode($rbody, true);
 		} catch (Exception $e) {
 			throw new Shirtsio_ApiError("Invalid response body from API: $rbody (HTTP response code was $rcode)", $rcode, $rbody);
 		}
@@ -124,8 +124,8 @@ class Shirtsio_ApiRequestor
 	}
 
 	private function _curlRequest($meth, $absUrl, $headers, $params)
-	{   
-		
+	{
+
 		$curl = curl_init();
 		$meth = strtolower($meth);
 		$opts = array();
@@ -134,7 +134,6 @@ class Shirtsio_ApiRequestor
 			if (count($params) > 0) {
 				$encoded = self::encode($params);
 				$absUrl = "$absUrl?$encoded";
-				//https://www.shirts.io/api/v1/internal/integration/auth/?username=damon.kong&password=kcchy4205
 			}
 		} else if ($meth == 'post') {
 			$opts[CURLOPT_POST] = 1;
@@ -151,7 +150,6 @@ class Shirtsio_ApiRequestor
 			throw new Shirtsio_ApiError("Unrecognized method $meth", $params);
 		}
 		$absUrl = self::utf8($absUrl);
-		print_r($absUrl);
 		$opts[CURLOPT_URL] = $absUrl;
 		$opts[CURLOPT_RETURNTRANSFER] = true;
 		$opts[CURLOPT_CONNECTTIMEOUT] = 60;
@@ -181,7 +179,6 @@ class Shirtsio_ApiRequestor
 
 		$rcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		curl_close($curl);
-		//print_r($rbody);
 		return array($rbody, $rcode);
 	}
 

@@ -10,7 +10,7 @@ To get started, add the following to your PHP script:
 
 Simple usage looks like:
 
-    Shirtsio::setApiKey('3ef58f89c6c8d0ce3f71e4ab3537db4e24d6ac40');
+    Shirtsio::setApiKey('0ef58f89c6c8d0ce3f71e4ab3537db4e24d6ac40');
     $categories_resp = Products::list_categories();
     print_r($categories_resp);
 

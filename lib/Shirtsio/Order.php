@@ -8,7 +8,6 @@ class Order extends Shirtsio_ApiResource{
 		return self::do_request(self::$url_order, $params, $method='post',$files,$no_api_key = false);
 	}
 	public static function get_order_status($params){
-		// https://shirts.io/api/v1/status/
 		$url = self::$url_status;
 		return self::do_request($url,$params);
 	}

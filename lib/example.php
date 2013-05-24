@@ -1,14 +1,7 @@
 <?php
 require_once("Shirtsio.php");
-/************ Account *************/
-// get api key
 
-$account_resp= Account::auth(array('username' => 'deantest', 'password' => 'Pa$$w0rd'));
-print_r($account_resp["api_key"]);
-
-/************End Account ************/
-
-Shirtsio::setApiKey($account_resp['api_key']);
+Shirtsio::setApiKey('0ef58f89c6c8d0ce3f71e4ab3537db4e24d6ac40');
 
 /************ quote /************/
 $quote_resp = Quote::get_quote(Array('garment[0][product_id]'=> 3, 'garment[0][color]'=> 'White', 'garment[0][sizes][med]'=> 100,
@@ -17,13 +10,6 @@ print_r($quote_resp['subtotal']);
 
 /************ End quote /************/
 
-/************ balance /************/
-//get balance
-
-$balance_resp = Balance::get_balance();
-print_r($balance_resp['balance']);
-
-/************ End balance ************/
 
 /************Order /************/
 //place order
@@ -64,10 +50,10 @@ $order_resp = Order::place_order($data, $files);
 print_r($order_resp);
 print_r($order_resp['order_id']);
 
-// get order status
-//$Orderid=array('order_id'=>'9999999');
-//$order_status_resp = Order::get_order_status($Orderid);
-//print_r($order_status_resp);
+//get order status
+$Orderid=array('order_id'=>'9999999');
+$order_status_resp = Order::get_order_status($Orderid);
+print_r($order_status_resp);
 
 /************ End Order /************/
 
@@ -81,7 +67,6 @@ print_r($categories_resp);
 
 $products_resp = Products::list_products($categories_resp[0]['category_id']);
 print_r($products_resp);
-
 
 $product_resp = Products::get_product($products_resp[0]['product_id']);
 print_r($product_resp);

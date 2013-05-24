@@ -33,4 +33,3 @@ class Products extends Shirtsio_ApiResource{
 		return $inventory;
 	}
 }
- 
