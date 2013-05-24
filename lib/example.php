@@ -50,7 +50,12 @@ $order_resp = Order::place_order($data, $files);
 print_r($order_resp);
 print_r($order_resp['order_id']);
 
+<<<<<<< HEAD
 //get order status
+=======
+// get order status
+
+>>>>>>> 7103e491d5284e55d3bff1e1a39c7338d41c42c6
 $Orderid=array('order_id'=>'9999999');
 $order_status_resp = Order::get_order_status($Orderid);
 print_r($order_status_resp);
