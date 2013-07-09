@@ -1,6 +1,6 @@
 = Installation
 
-Obtain the latest version of the Stripe PHP bindings with:
+Obtain the latest version at:
 
     git clone https://github.com/shirtsio/shirtsio-php
 
