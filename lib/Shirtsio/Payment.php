@@ -17,6 +17,6 @@ class Payment extends Shirtsio_ApiResource
 	 
 	public function  get_payment_status($params){
 		// https://www.shirts.io/api/v1/payment/status/
-		return self::do_request(slef::$url_payment_status, $params, $method='get');
+		return self::do_request(self::$url_payment_status, $params, $method='get');
 	}
 }
