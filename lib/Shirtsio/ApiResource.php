@@ -25,7 +25,7 @@ class Shirtsio_ApiResource extends Shirtsio
 	private static function _validateCall($params = null, $apiKey = null)
 	{
 		if ($params && !is_array($params))
-		throw new Shirtsio_Error("You must pass an array as the first argument to Shirts.io API method calls.  (HINT: an example call to create a charge would be: \"ShirtsioCharge::create(array('amount' => 100, 'currency' => 'usd', 'card' => array('number' => 4242424242424242, 'exp_month' => 5, 'exp_year' => 2015)))\")");
+		throw new Shirtsio_Error("You must pass an array as the first argument to Shirts.io API method calls.  (HINT: an example call to list products would be: \"Products::list_products(category_id)\")");
 		if ($apiKey && !is_string($apiKey))
 		throw new Shirtsio_Error('The second argument to Shirts.io API method calls is an optional per-request apiKey, which must be a string.  (HINT: you can set a global apiKey by "Shirtsio::setApiKey(<apiKey>)")');
 	}
