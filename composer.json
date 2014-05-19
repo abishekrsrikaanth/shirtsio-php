@@ -2,8 +2,7 @@
   "name": "abishekrsrikaanth/shirtsio-php",
   "description": "Shirtsio PHP Library",
   "keywords": [
-    "shirtsio",
-    "api"
+    "shirtsio","api","shirts-io","shirts"
   ],
   "homepage": "https://www.shirts.io/",
   "license": "MIT",
